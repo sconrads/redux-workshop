@@ -35,6 +35,10 @@ We need a store. Redux advocates having all your application data in a single ob
 
 Redux gives us a convenient function, namely `createStore()`.
 
+```javascript
+import { createStore } from 'redux';
+```
+
 Use this to get yourself a shiny new store, ready to be filled with our application data.
 Try to call `createStore` without any parameters initially, and check the browser console.
 
@@ -358,6 +362,9 @@ import configureStore from './configureStore';
 const store = configureStore();
 ```
 
+`configureStore` expects a file called `reducers/index.js` to be present and exporting a valid reducer.
+* Create `reducers/index.js` that imports your tweet reducer and exports it as default
+
 While you're at it, import the `<DevTools>` component we've made (`./containers/DevTools`) and modify your `render` call so it looks like this:
 
 ```javascript
@@ -424,6 +431,7 @@ function rootReducer(state = initialState, action) {
     route: routeReducer(state.route, action)
   };
 }
+export default rootReducer;
 ```
 
 This works, but will become cumbersome when we have more than two reducers. Luckily, Redux provides the aptly named function `combineReducers`. This function turns an object whose values are reducers into a combined reducer that works like the one we made. The shape of the resulting combined state will match the keys of the passed object of reducers. We also do not need to specify the initial state of this combined reducer as it will use the initial states of each of the individual reducers.
