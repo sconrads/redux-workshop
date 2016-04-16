@@ -1,7 +1,8 @@
-export default function reducer(state=[], action) {
+export default function tweets(state=[], action) {
+  console.log('reducer')
   if (action.type === 'TWEET_RECEIVED')
   {
-    return  {tweets: state.tweets.concat(action.payload)};
+    return  state.concat(action.payload);
   }
-  return {tweets: []};
+  return state;
 }
